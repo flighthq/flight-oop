@@ -54,6 +54,16 @@
     "vitest-webgl-canvas-mock": "^1.1.0"
   },
   "dependencies": {
+    "@flighthq/engine": "file:../engine/packages/engine",
+    "@flighthq/types": "file:../engine/packages/types",
+    "@flighthq/foundation": "file:../engine/packages/foundation",
+    "@flighthq/geometry": "file:../engine/packages/geometry",
+    "@flighthq/materials": "file:../engine/packages/materials",
+    "@flighthq/render-core": "file:../engine/packages/render-core",
+    "@flighthq/render-canvas": "file:../engine/packages/render-canvas",
+    "@flighthq/scene-graph-core": "file:../engine/packages/scene-graph-core",
+    "@flighthq/scene-graph-display": "file:../engine/packages/scene-graph-display",
+    "@flighthq/scene-graph-sprite": "file:../engine/packages/scene-graph-sprite",
     "@vitejs/plugin-vue": "^6.0.3",
     "vite": "^7.3.1"
   }

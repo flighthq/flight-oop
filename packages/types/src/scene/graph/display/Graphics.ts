@@ -1,1 +1,0 @@
-export type Graphics = object;
