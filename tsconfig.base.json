@@ -12,10 +12,9 @@
     "declarationMap": true,
     "sourceMap": true,
     "composite": true,
-    "baseUrl": ".",
     "paths": {
-      "@flighthq/flight": ["packages/flight/src/index.ts"],
-      "@flighthq/flight/*": ["packages/flight/src/*"]
+      "@flighthq/flight": ["./packages/flight/src/index.ts"],
+      "@flighthq/flight/*": ["./packages/flight/src/*"]
     },
     "types": ["@testing-library/jest-dom", "vitest/globals"] // Include Vitest globals for type-checking
   },
