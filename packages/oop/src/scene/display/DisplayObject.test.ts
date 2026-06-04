@@ -9,11 +9,11 @@ import {
   getLocalBoundsID,
   getLocalTransform2D,
   getDisplayObjectRuntime,
-} from '../../../internal/sdkCompat.js';
-import type { DisplayObjectRuntime } from '../../../internal/sdkCompat.js';
+} from '../../internal/sdkCompat.js';
+import type { DisplayObjectRuntime } from '../../internal/sdkCompat.js';
 
-import Rectangle from '../../../geometry/Rectangle.js';
-import Vector2 from '../../../geometry/Vector2.js';
+import Rectangle from '../../geometry/Rectangle.js';
+import Vector2 from '../../geometry/Vector2.js';
 import DisplayObject from './DisplayObject.js';
 
 describe('DisplayObject', () => {

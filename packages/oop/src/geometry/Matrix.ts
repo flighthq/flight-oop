@@ -1,14 +1,14 @@
 import { matrix3x2 } from '../internal/sdkCompat.js';
 import type { Matrix3x2 as RawMatrix } from '../internal/sdkCompat.js';
 
-import FlightObject from '../FlightObject';
+import Entity from '../Entity';
 import type Matrix3 from './Matrix3';
 import type Matrix4 from './Matrix4';
 import Rectangle from './Rectangle';
 import Vector2 from './Vector2';
 import type Vector3 from './Vector3';
 
-export default class Matrix extends FlightObject<RawMatrix> {
+export default class Matrix extends Entity<RawMatrix> {
   constructor(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number) {
     super();
     if (a || b || c || d || tx || ty) {
@@ -92,7 +92,7 @@ export default class Matrix extends FlightObject<RawMatrix> {
   }
 
   static fromRaw(raw: Readonly<RawMatrix>): Matrix {
-    return FlightObject.getOrCreate(raw, Matrix)!;
+    return Entity.getOrCreate(raw, Matrix)!;
   }
 
   identity(): Matrix {

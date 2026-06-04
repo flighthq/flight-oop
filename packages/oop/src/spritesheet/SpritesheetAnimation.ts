@@ -1,9 +1,9 @@
-import { createSpritesheetAnimation } from '../../internal/sdkCompat.js';
-import type { SpritesheetAnimation as RawSpritesheetAnimation } from '../../internal/sdkCompat.js';
+import { createSpritesheetAnimation } from '../internal/sdkCompat.js';
+import type { SpritesheetAnimation as RawSpritesheetAnimation } from '../internal/sdkCompat.js';
 
-import FlightObject from '../../FlightObject';
+import Entity from '../Entity';
 
-export default class SpritesheetAnimation extends FlightObject<RawSpritesheetAnimation> {
+export default class SpritesheetAnimation extends Entity<RawSpritesheetAnimation> {
   constructor(label?: string, frames?: number[], frameDuration?: number, loop?: boolean) {
     super();
     const raw = this.__raw;
@@ -18,7 +18,7 @@ export default class SpritesheetAnimation extends FlightObject<RawSpritesheetAni
   }
 
   static fromRaw(raw: RawSpritesheetAnimation): SpritesheetAnimation {
-    return FlightObject.getOrCreate(raw, SpritesheetAnimation)!;
+    return Entity.getOrCreate(raw, SpritesheetAnimation)!;
   }
 
   // Get & Set Methods

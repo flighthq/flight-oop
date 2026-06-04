@@ -1,10 +1,10 @@
 import { rectangle } from '../internal/sdkCompat.js';
 import type { Rectangle as RawRectangle } from '../internal/sdkCompat.js';
 
-import FlightObject from '../FlightObject.js';
+import Entity from '../Entity.js';
 import Vector2 from './Vector2.js';
 
-export default class Rectangle extends FlightObject<RawRectangle> {
+export default class Rectangle extends Entity<RawRectangle> {
   constructor(x?: number, y?: number, width?: number, height?: number) {
     super();
     const raw = this.__raw;
@@ -44,7 +44,7 @@ export default class Rectangle extends FlightObject<RawRectangle> {
   }
 
   static fromRaw(raw: Readonly<RawRectangle>): Rectangle {
-    return FlightObject.getOrCreate(raw, Rectangle)!;
+    return Entity.getOrCreate(raw, Rectangle)!;
   }
 
   inflate(dx: number, dy: number): void {

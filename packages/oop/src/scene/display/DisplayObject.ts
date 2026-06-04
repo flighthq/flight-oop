@@ -13,17 +13,17 @@ import {
   createDisplayObject,
   getDisplayObjectRuntime,
   StageKind,
-} from '../../../internal/sdkCompat.js';
-import type { BlendMode, DisplayObject as RawDisplayObject, Shader } from '../../../internal/sdkCompat.js';
+} from '../../internal/sdkCompat.js';
+import type { BlendMode, DisplayObject as RawDisplayObject, Shader } from '../../internal/sdkCompat.js';
 
-import FlightObject from '../../../FlightObject.js';
-import Rectangle from '../../../geometry/Rectangle.js';
-import Vector2 from '../../../geometry/Vector2.js';
+import Entity from '../../Entity.js';
+import Rectangle from '../../geometry/Rectangle.js';
+import Vector2 from '../../geometry/Vector2.js';
 import type LoaderInfo from './LoaderInfo.js';
 import type Stage from './Stage.js';
 import Transform from './Transform.js';
 
-export default class DisplayObject extends FlightObject<RawDisplayObject> {
+export default class DisplayObject extends Entity<RawDisplayObject> {
   protected __loaderInfo: LoaderInfo | null = null;
   protected __root: DisplayObject | null = null;
   protected __transform: Transform | null = null;
@@ -116,7 +116,7 @@ export default class DisplayObject extends FlightObject<RawDisplayObject> {
 
   get mask(): DisplayObject | null {
     if (this.__raw.mask !== null) {
-      return FlightObject.get(this.__raw.mask);
+      return Entity.get(this.__raw.mask);
     }
     return null;
   }
@@ -141,7 +141,7 @@ export default class DisplayObject extends FlightObject<RawDisplayObject> {
   }
 
   get parent(): DisplayObject | null {
-    return FlightObject.get(getParent(this.__raw)) as DisplayObject | null;
+    return Entity.get(getParent(this.__raw)) as DisplayObject | null;
   }
 
   get root(): DisplayObject | null {
@@ -224,7 +224,7 @@ export default class DisplayObject extends FlightObject<RawDisplayObject> {
   get stage(): Stage | null {
     let current = getDisplayObjectRuntime(this.__raw).parent;
     while (current !== null) {
-      if (current.kind === StageKind) return FlightObject.get(current) as Stage | null;
+      if (current.kind === StageKind) return Entity.get(current) as Stage | null;
       current = getDisplayObjectRuntime(current as RawDisplayObject).parent;
     }
     return null;

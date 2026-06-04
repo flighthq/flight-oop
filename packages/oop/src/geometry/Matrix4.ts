@@ -1,13 +1,13 @@
 import { matrix4x4 } from '../internal/sdkCompat.js';
 import type { Matrix4x4 as RawMatrix4 } from '../internal/sdkCompat.js';
 
-import FlightObject from '../FlightObject';
+import Entity from '../Entity';
 import type Matrix from './Matrix';
 import type Matrix3 from './Matrix3';
 import Vector3 from './Vector3';
 import Vector4 from './Vector4';
 
-export default class Matrix4 extends FlightObject<RawMatrix4> {
+export default class Matrix4 extends Entity<RawMatrix4> {
   constructor(
     m00?: number,
     m01?: number,
@@ -126,7 +126,7 @@ export default class Matrix4 extends FlightObject<RawMatrix4> {
   }
 
   static fromRaw(raw: Readonly<RawMatrix4>): Matrix4 {
-    return FlightObject.getOrCreate(raw, Matrix4)!;
+    return Entity.getOrCreate(raw, Matrix4)!;
   }
 
   get(row: number, column: number): number {

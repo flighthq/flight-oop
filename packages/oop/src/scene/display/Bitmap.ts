@@ -1,8 +1,8 @@
-import { createBitmap, invalidateAppearance, invalidateLocalBounds } from '../../../internal/sdkCompat.js';
-import type { Bitmap as RawBitmap, BitmapData } from '../../../internal/sdkCompat.js';
+import { createBitmap, invalidateAppearance, invalidateLocalBounds } from '../../internal/sdkCompat.js';
+import type { Bitmap as RawBitmap, BitmapData } from '../../internal/sdkCompat.js';
 
-import ImageSource from '../../../assets/ImageSource';
-import FlightObject from '../../../FlightObject';
+import ImageSource from '../../assets/ImageSource';
+import Entity from '../../Entity';
 import DisplayObject from './DisplayObject';
 
 export default class Bitmap extends DisplayObject {
@@ -19,13 +19,13 @@ export default class Bitmap extends DisplayObject {
   }
 
   static fromRaw(raw: RawBitmap): Bitmap {
-    return FlightObject.getOrCreate(raw, Bitmap)!;
+    return Entity.getOrCreate(raw, Bitmap)!;
   }
 
   // Get & Set Methods
 
   get image(): ImageSource | null {
-    return FlightObject.getOrCreate(this.__data.image, ImageSource);
+    return Entity.getOrCreate(this.__data.image, ImageSource);
   }
 
   set image(value: ImageSource | null) {

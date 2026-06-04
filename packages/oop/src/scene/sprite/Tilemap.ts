@@ -1,8 +1,8 @@
-import { createTilemap } from '../../../internal/sdkCompat.js';
-import type { Tilemap as RawTilemap, TilemapData } from '../../../internal/sdkCompat.js';
+import { createTilemap } from '../../internal/sdkCompat.js';
+import type { Tilemap as RawTilemap, TilemapData } from '../../internal/sdkCompat.js';
 
-import { Tileset } from '../../../assets';
-import FlightObject from '../../../FlightObject';
+import { Tileset } from '../../assets';
+import Entity from '../../Entity';
 import SpriteNode from './SpriteNode';
 
 export default class Tilemap extends SpriteNode {
@@ -18,11 +18,11 @@ export default class Tilemap extends SpriteNode {
   }
 
   static fromRaw(raw: RawTilemap): Tilemap {
-    return FlightObject.getOrCreate(raw, Tilemap)!;
+    return Entity.getOrCreate(raw, Tilemap)!;
   }
 
   get tileset(): Tileset | null {
-    return FlightObject.getOrCreate(this.__data.tileset, Tileset);
+    return Entity.getOrCreate(this.__data.tileset, Tileset);
   }
 
   set tileset(value: Tileset | null) {

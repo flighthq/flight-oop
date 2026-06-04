@@ -1,11 +1,11 @@
 import { addTextureAtlasRegion, createTextureAtlas } from '../internal/sdkCompat.js';
 import type { TextureAtlas as RawTextureAtlas } from '../internal/sdkCompat.js';
 
-import FlightObject from '../FlightObject';
+import Entity from '../Entity';
 import ImageSource from './ImageSource';
 import TextureAtlasRegion from './TextureAtlasRegion';
 
-export default class TextureAtlas extends FlightObject<RawTextureAtlas> {
+export default class TextureAtlas extends Entity<RawTextureAtlas> {
   constructor(image?: ImageSource) {
     super();
     if (image) this.__raw.image = image.raw;
@@ -28,12 +28,12 @@ export default class TextureAtlas extends FlightObject<RawTextureAtlas> {
   }
 
   static fromRaw(raw: RawTextureAtlas): TextureAtlas {
-    return FlightObject.getOrCreate(raw, TextureAtlas)!;
+    return Entity.getOrCreate(raw, TextureAtlas)!;
   }
 
   getRegion(index: number): Readonly<TextureAtlasRegion> | null {
     if (index >= 0 && index < this.__raw.regions.length) {
-      return FlightObject.getOrCreate(this.__raw.regions[index], TextureAtlasRegion);
+      return Entity.getOrCreate(this.__raw.regions[index], TextureAtlasRegion);
     }
     return null;
   }
@@ -41,7 +41,7 @@ export default class TextureAtlas extends FlightObject<RawTextureAtlas> {
   // Get & Set Methods
 
   get image(): ImageSource | null {
-    return FlightObject.getOrCreate(this.__raw.image, ImageSource);
+    return Entity.getOrCreate(this.__raw.image, ImageSource);
   }
 
   set image(value: ImageSource | null) {

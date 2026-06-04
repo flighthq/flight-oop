@@ -1,11 +1,11 @@
-import { getBoundsRect, getParent, invalidateAppearance, invalidateLocalTransform } from '../../../internal/sdkCompat.js';
-import type { BlendMode, Shader, SpriteNode as RawSpriteNode } from '../../../internal/sdkCompat.js';
+import { getBoundsRect, getParent, invalidateAppearance, invalidateLocalTransform } from '../../internal/sdkCompat.js';
+import type { BlendMode, Shader, SpriteNode as RawSpriteNode } from '../../internal/sdkCompat.js';
 
-import ColorTransform from '../../../materials/ColorTransform';
-import FlightObject from '../../../FlightObject';
+import ColorTransform from '../../materials/ColorTransform';
+import Entity from '../../Entity';
 import type Sprite from './Sprite';
 
-export default class SpriteNode extends FlightObject<RawSpriteNode> {
+export default class SpriteNode extends Entity<RawSpriteNode> {
   protected constructor() {
     super();
   }
@@ -51,7 +51,7 @@ export default class SpriteNode extends FlightObject<RawSpriteNode> {
   }
 
   get colorTransform(): ColorTransform | null {
-    return FlightObject.getOrCreate(this.__raw.colorTransform, ColorTransform);
+    return Entity.getOrCreate(this.__raw.colorTransform, ColorTransform);
   }
 
   set colorTransform(value: ColorTransform | null) {
@@ -86,7 +86,7 @@ export default class SpriteNode extends FlightObject<RawSpriteNode> {
   }
 
   get parent(): Sprite | null {
-    return FlightObject.get(getParent(this.__raw)) as unknown as Sprite;
+    return Entity.get(getParent(this.__raw)) as unknown as Sprite;
   }
 
   get rotation(): number {

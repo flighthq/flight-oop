@@ -1,10 +1,10 @@
 import { createTileset } from '../internal/sdkCompat.js';
 import type { Tileset as RawTileset } from '../internal/sdkCompat.js';
 
-import FlightObject from '../FlightObject';
+import Entity from '../Entity';
 import TextureAtlas from './TextureAtlas';
 
-export default class Tileset extends FlightObject<RawTileset> {
+export default class Tileset extends Entity<RawTileset> {
   constructor(atlas?: TextureAtlas, columns?: number, rows?: number, tileWidth?: number, tileHeight?: number) {
     super();
     const raw = this.__raw;
@@ -20,14 +20,14 @@ export default class Tileset extends FlightObject<RawTileset> {
   }
 
   static fromRaw(raw: RawTileset): Tileset {
-    return FlightObject.getOrCreate(raw, Tileset)!;
+    return Entity.getOrCreate(raw, Tileset)!;
   }
 
   // Get & Set Methods
 
   get atlas(): TextureAtlas | null {
     if (this.__raw.atlas === null) return null;
-    return FlightObject.getOrCreate(this.__raw.atlas, TextureAtlas);
+    return Entity.getOrCreate(this.__raw.atlas, TextureAtlas);
   }
 
   set atlas(value: TextureAtlas | null) {

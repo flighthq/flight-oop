@@ -1,7 +1,7 @@
-import { createMovieClip } from '../../../internal/sdkCompat.js';
-import type { MovieClip as RawMovieClip, MovieClipData } from '../../../internal/sdkCompat.js';
+import { createMovieClip } from '../../internal/sdkCompat.js';
+import type { MovieClip as RawMovieClip, MovieClipData } from '../../internal/sdkCompat.js';
 
-import FlightObject from '../../../FlightObject.js';
+import Entity from '../../Entity.js';
 import DisplayContainer from './DisplayContainer.js';
 
 export default class MovieClip extends DisplayContainer {
@@ -16,7 +16,7 @@ export default class MovieClip extends DisplayContainer {
   }
 
   static fromRaw(raw: RawMovieClip): MovieClip {
-    return FlightObject.getOrCreate(raw, MovieClip)!;
+    return Entity.getOrCreate(raw, MovieClip)!;
   }
 
   // Get & Set Methods

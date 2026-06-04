@@ -1,10 +1,10 @@
-import { invalidateAppearance, createQuadBatch, reserveQuadBatch, resizeQuadBatch } from '../../../internal/sdkCompat.js';
-import type { QuadBatch as RawQuadBatch, QuadBatchData, QuadTransformType } from '../../../internal/sdkCompat.js';
+import { invalidateAppearance, createQuadBatch, reserveQuadBatch, resizeQuadBatch } from '../../internal/sdkCompat.js';
+import type { QuadBatch as RawQuadBatch, QuadBatchData, QuadTransformType } from '../../internal/sdkCompat.js';
 
-import TextureAtlas from '../../../assets/TextureAtlas';
-import FlightObject from '../../../FlightObject';
-import Matrix from '../../../geometry/Matrix';
-import Vector2 from '../../../geometry/Vector2';
+import TextureAtlas from '../../assets/TextureAtlas';
+import Entity from '../../Entity';
+import Matrix from '../../geometry/Matrix';
+import Vector2 from '../../geometry/Vector2';
 import SpriteNode from './SpriteNode';
 
 export default class QuadBatch extends SpriteNode {
@@ -21,7 +21,7 @@ export default class QuadBatch extends SpriteNode {
   }
 
   static fromRaw(raw: RawQuadBatch): QuadBatch {
-    return FlightObject.getOrCreate(raw, QuadBatch)!;
+    return Entity.getOrCreate(raw, QuadBatch)!;
   }
 
   readID(index: number): number {
@@ -78,7 +78,7 @@ export default class QuadBatch extends SpriteNode {
 
   get atlas(): TextureAtlas | null {
     if (this.__data.atlas === null) return null;
-    return FlightObject.getOrCreate(this.__data.atlas, TextureAtlas);
+    return Entity.getOrCreate(this.__data.atlas, TextureAtlas);
   }
 
   set atlas(value: TextureAtlas | null) {

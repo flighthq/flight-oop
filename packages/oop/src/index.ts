@@ -1,6 +1,6 @@
-export * from './animation';
+export * from './spritesheet';
 export * from './assets';
-export { default as FlightObject } from './FlightObject';
+export { default as Entity } from './Entity';
 export * from './geometry';
 export * from './materials';
 export * from './render';

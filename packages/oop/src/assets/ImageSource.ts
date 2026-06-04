@@ -1,9 +1,9 @@
 import { createImageSource } from '../internal/sdkCompat.js';
 import type { ImageSource as RawImageSource } from '../internal/sdkCompat.js';
 
-import FlightObject from '../FlightObject';
+import Entity from '../Entity';
 
-export default class ImageSource extends FlightObject<RawImageSource> {
+export default class ImageSource extends Entity<RawImageSource> {
   constructor(src?: HTMLImageElement) {
     super();
     if (src) {
@@ -19,7 +19,7 @@ export default class ImageSource extends FlightObject<RawImageSource> {
   }
 
   static fromRaw(raw: RawImageSource): ImageSource {
-    return FlightObject.getOrCreate(raw, ImageSource)!;
+    return Entity.getOrCreate(raw, ImageSource)!;
   }
 
   get height(): number {

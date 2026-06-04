@@ -1,11 +1,11 @@
 import { vector2, vector3, vector4 } from '../internal/sdkCompat.js';
 import type { Vector4 as RawVector4 } from '../internal/sdkCompat.js';
 
-import FlightObject from '../FlightObject';
+import Entity from '../Entity';
 import type Vector2 from './Vector2';
 import type Vector3 from './Vector3';
 
-export default class Vector4 extends FlightObject<RawVector4> {
+export default class Vector4 extends Entity<RawVector4> {
   constructor(x?: number, y?: number, z?: number, w?: number) {
     super();
     const raw = this.__raw;
@@ -62,7 +62,7 @@ export default class Vector4 extends FlightObject<RawVector4> {
   }
 
   static fromRaw(raw: Readonly<RawVector4>): Vector4 {
-    return FlightObject.getOrCreate(raw, Vector4)!;
+    return Entity.getOrCreate(raw, Vector4)!;
   }
 
   static fromVector2(source: Readonly<Vector2>): Vector4 {

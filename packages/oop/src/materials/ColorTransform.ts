@@ -1,9 +1,9 @@
 import { colorTransform } from '../internal/sdkCompat.js';
 import type { ColorTransform as RawColorTransform } from '../internal/sdkCompat.js';
 
-import FlightObject from '../FlightObject';
+import Entity from '../Entity';
 
-export default class ColorTransform extends FlightObject<RawColorTransform> {
+export default class ColorTransform extends Entity<RawColorTransform> {
   constructor(
     redMultiplier?: number,
     greenMultiplier?: number,
@@ -48,7 +48,7 @@ export default class ColorTransform extends FlightObject<RawColorTransform> {
   }
 
   static fromRaw(raw: Readonly<RawColorTransform>): ColorTransform {
-    return FlightObject.getOrCreate(raw, ColorTransform)!;
+    return Entity.getOrCreate(raw, ColorTransform)!;
   }
 
   identity(): void {

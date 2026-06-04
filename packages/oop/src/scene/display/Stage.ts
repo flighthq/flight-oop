@@ -1,7 +1,7 @@
-import { createStage } from '../../../internal/sdkCompat.js';
-import type { Stage as RawStage, StageData } from '../../../internal/sdkCompat.js';
+import { createStage } from '../../internal/sdkCompat.js';
+import type { Stage as RawStage, StageData } from '../../internal/sdkCompat.js';
 
-import FlightObject from '../../../FlightObject.js';
+import Entity from '../../Entity.js';
 import DisplayContainer from './DisplayContainer.js';
 
 export default class Stage extends DisplayContainer {
@@ -16,7 +16,7 @@ export default class Stage extends DisplayContainer {
   }
 
   static fromRaw(raw: RawStage): Stage {
-    return FlightObject.getOrCreate(raw, Stage)!;
+    return Entity.getOrCreate(raw, Stage)!;
   }
 
   // Get & Set Methods

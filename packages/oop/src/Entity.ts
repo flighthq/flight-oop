@@ -1,16 +1,16 @@
 import { attachBinding, createEntity, getBinding } from './internal/sdkCompat.js';
 import type { Entity } from './internal/sdkCompat.js';
 
-export default class FlightObject<RawType extends Entity> {
+export default class Entity<RawType extends Entity> {
   private static nextRaw: object | null = null;
 
   protected __raw: RawType;
 
   constructor() {
     let raw: RawType;
-    if (FlightObject.nextRaw) {
-      raw = FlightObject.nextRaw as RawType;
-      FlightObject.nextRaw = null;
+    if (Entity.nextRaw) {
+      raw = Entity.nextRaw as RawType;
+      Entity.nextRaw = null;
     } else {
       raw = this.__create();
     }
@@ -22,14 +22,14 @@ export default class FlightObject<RawType extends Entity> {
     return createEntity();
   }
 
-  static get<RawType extends Entity, Type extends FlightObject<RawType>>(
+  static get<RawType extends Entity, Type extends Entity<RawType>>(
     raw: Readonly<RawType> | null | undefined,
   ): Type | null {
     if (!raw) return null;
     return getBinding(raw) as Type | null;
   }
 
-  static getOrCreate<RawType extends Entity, Type extends FlightObject<Entity>>(
+  static getOrCreate<RawType extends Entity, Type extends Entity<Entity>>(
     raw: Readonly<RawType> | null | undefined,
     classType: new () => Type,
   ): Type | null {

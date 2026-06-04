@@ -1,11 +1,11 @@
-import { createSpritesheet } from '../../internal/sdkCompat.js';
-import type { Spritesheet as RawSpritesheet } from '../../internal/sdkCompat.js';
+import { createSpritesheet } from '../internal/sdkCompat.js';
+import type { Spritesheet as RawSpritesheet } from '../internal/sdkCompat.js';
 
-import TextureAtlas from '../../assets/TextureAtlas';
-import FlightObject from '../../FlightObject';
+import TextureAtlas from '../assets/TextureAtlas';
+import Entity from '../Entity';
 import SpritesheetAnimation from './SpritesheetAnimation';
 
-export default class Spritesheet extends FlightObject<RawSpritesheet> {
+export default class Spritesheet extends Entity<RawSpritesheet> {
   constructor(atlas?: TextureAtlas, animations?: SpritesheetAnimation[]) {
     super();
     if (atlas) this.__raw.atlas = atlas.raw;
@@ -21,12 +21,12 @@ export default class Spritesheet extends FlightObject<RawSpritesheet> {
   }
 
   static fromRaw(raw: RawSpritesheet): Spritesheet {
-    return FlightObject.getOrCreate(raw, Spritesheet)!;
+    return Entity.getOrCreate(raw, Spritesheet)!;
   }
 
   getAnimation(index: number): SpritesheetAnimation | null {
     if (index >= 0 && index < this.__raw.animations.length) {
-      return FlightObject.getOrCreate(this.__raw.animations[index], SpritesheetAnimation);
+      return Entity.getOrCreate(this.__raw.animations[index], SpritesheetAnimation);
     }
     return null;
   }
@@ -34,7 +34,7 @@ export default class Spritesheet extends FlightObject<RawSpritesheet> {
   // Get & Set Methods
 
   get atlas(): TextureAtlas | null {
-    return FlightObject.getOrCreate(this.__raw.atlas, TextureAtlas);
+    return Entity.getOrCreate(this.__raw.atlas, TextureAtlas);
   }
 
   set atlas(value: TextureAtlas | null) {

@@ -1,9 +1,9 @@
 import { vector2 } from '../internal/sdkCompat.js';
 import type { Vector2 as RawVector2 } from '../internal/sdkCompat.js';
 
-import FlightObject from '../FlightObject';
+import Entity from '../Entity';
 
-export default class Vector2 extends FlightObject<RawVector2> {
+export default class Vector2 extends Entity<RawVector2> {
   constructor(x?: number, y?: number) {
     super();
     const raw = this.__raw;
@@ -51,7 +51,7 @@ export default class Vector2 extends FlightObject<RawVector2> {
   }
 
   static fromRaw(raw: Readonly<RawVector2>): Vector2 {
-    return FlightObject.getOrCreate(raw, Vector2)!;
+    return Entity.getOrCreate(raw, Vector2)!;
   }
 
   static lerp(a: Readonly<Vector2>, b: Readonly<Vector2>, t: number): Vector2 {

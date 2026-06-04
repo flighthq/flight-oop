@@ -1,9 +1,9 @@
 import { createTextureAtlasRegion } from '../internal/sdkCompat.js';
 import type { TextureAtlasRegion as RawTextureAtlasRegion } from '../internal/sdkCompat.js';
 
-import FlightObject from '../FlightObject';
+import Entity from '../Entity';
 
-export default class TextureAtlasRegion extends FlightObject<RawTextureAtlasRegion> {
+export default class TextureAtlasRegion extends Entity<RawTextureAtlasRegion> {
   constructor(x?: number, y?: number, width?: number, height?: number, pivotX?: number, pivotY?: number) {
     super();
     const raw = this.__raw;
@@ -20,7 +20,7 @@ export default class TextureAtlasRegion extends FlightObject<RawTextureAtlasRegi
   }
 
   static fromRaw(raw: Readonly<RawTextureAtlasRegion>): TextureAtlasRegion {
-    return FlightObject.getOrCreate(raw, TextureAtlasRegion)!;
+    return Entity.getOrCreate(raw, TextureAtlasRegion)!;
   }
 
   // Get & Set Methods

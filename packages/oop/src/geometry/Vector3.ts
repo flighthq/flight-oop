@@ -1,9 +1,9 @@
 import { vector3 } from '../internal/sdkCompat.js';
 import type { Vector3 as RawVector3 } from '../internal/sdkCompat.js';
 
-import FlightObject from '../FlightObject';
+import Entity from '../Entity';
 
-export default class Vector3 extends FlightObject<RawVector3> {
+export default class Vector3 extends Entity<RawVector3> {
   constructor(x?: number, y?: number, z?: number) {
     super();
     const raw = this.__raw;
@@ -60,7 +60,7 @@ export default class Vector3 extends FlightObject<RawVector3> {
   }
 
   static fromRaw(raw: Readonly<RawVector3>): Vector3 {
-    return FlightObject.getOrCreate(raw, Vector3)!;
+    return Entity.getOrCreate(raw, Vector3)!;
   }
 
   nearEquals(b: Readonly<Vector3>, tolerance: number = 1e-6): boolean {

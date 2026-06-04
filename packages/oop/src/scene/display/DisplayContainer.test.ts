@@ -1,6 +1,6 @@
-import FlightObject from '@flighthq/oop/FlightObject.js';
-import { getDisplayObjectRuntime } from '../../../internal/sdkCompat.js';
-import type { DisplayObject as RawDisplayObject } from '../../../internal/sdkCompat.js';
+import Entity from '@flighthq/oop/Entity.js';
+import { getDisplayObjectRuntime } from '../../internal/sdkCompat.js';
+import type { DisplayObject as RawDisplayObject } from '../../internal/sdkCompat.js';
 
 import DisplayContainer from './DisplayContainer.js';
 import DisplayObject from './DisplayObject.js';
@@ -19,7 +19,7 @@ describe('DisplayContainer', () => {
   function getChildren(object: DisplayObject) {
     const children = getDisplayObjectRuntime(object.raw).children;
     return children!.map((raw) => {
-      return FlightObject.get(raw as RawDisplayObject);
+      return Entity.get(raw as RawDisplayObject);
     });
   }
 

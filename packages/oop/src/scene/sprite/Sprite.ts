@@ -9,10 +9,10 @@ import {
   swapChildren as _swapChildren,
   swapChildrenAt as _swapChildrenAt,
   createSprite,
-} from '../../../internal/sdkCompat.js';
-import type { Sprite as RawSprite, SpriteData } from '../../../internal/sdkCompat.js';
+} from '../../internal/sdkCompat.js';
+import type { Sprite as RawSprite, SpriteData } from '../../internal/sdkCompat.js';
 
-import FlightObject from '../../../FlightObject';
+import Entity from '../../Entity';
 import SpriteNode from './SpriteNode';
 
 export default class Sprite extends SpriteNode {
@@ -38,7 +38,7 @@ export default class Sprite extends SpriteNode {
   }
 
   static fromRaw(raw: RawSprite): Sprite {
-    return FlightObject.getOrCreate(raw, Sprite)!;
+    return Entity.getOrCreate(raw, Sprite)!;
   }
 
   removeChild(child: SpriteNode): SpriteNode {
@@ -48,7 +48,7 @@ export default class Sprite extends SpriteNode {
 
   removeChildAt(index: number): SpriteNode | null {
     const raw = _removeChildAt(this.__raw, index);
-    return FlightObject.get(raw);
+    return Entity.get(raw);
   }
 
   removeChildren(beginIndex: number = 0, endIndex?: number): void {

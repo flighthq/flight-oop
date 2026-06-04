@@ -1,7 +1,7 @@
 import { Shader as RawShader } from '../internal/sdkCompat.js';
-import FlightObject from '../FlightObject';
+import Entity from '../Entity';
 
-export default class Shader extends FlightObject<RawShader> {
+export default class Shader extends Entity<RawShader> {
   constructor() {
     super();
   }
