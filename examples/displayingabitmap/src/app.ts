@@ -1,4 +1,4 @@
-import { CanvasRenderer } from '@flighthq/flight';
+import { CanvasRenderer } from '@flighthq/oop';
 
 import Main from './Main.js';
 

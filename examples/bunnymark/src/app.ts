@@ -1,5 +1,5 @@
-import { CanvasRenderer, Vector2 } from '@flighthq/flight';
-import { ImageSource, QuadBatch, TextureAtlas, TextureAtlasRegion } from '@flighthq/flight';
+import { CanvasRenderer, Vector2 } from '@flighthq/oop';
+import { ImageSource, QuadBatch, TextureAtlas, TextureAtlasRegion } from '@flighthq/oop';
 import Stats from 'stats.js';
 
 class App {

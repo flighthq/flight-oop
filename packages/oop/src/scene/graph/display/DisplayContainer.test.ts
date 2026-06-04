@@ -1,4 +1,4 @@
-import FlightObject from '@flighthq/flight/FlightObject.js';
+import FlightObject from '@flighthq/oop/FlightObject.js';
 import { getDisplayObjectRuntime } from '../../../internal/sdkCompat.js';
 import type { DisplayObject as RawDisplayObject } from '../../../internal/sdkCompat.js';
 

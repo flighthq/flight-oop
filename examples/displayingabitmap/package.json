@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@flighthq/flight": "*",
+    "@flighthq/oop": "*",
     "typescript": "^5.0.0",
     "vite": "^4.0.0"
   },

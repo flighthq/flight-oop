@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@flighthq/flight": "*",
+    "@flighthq/oop": "*",
     "@types/stats.js": "^0.17.4",
     "stats.js": "^0.17.0",
     "typescript": "^5.0.0",

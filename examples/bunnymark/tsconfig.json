@@ -4,7 +4,7 @@
     "outDir": "./dist",
     "rootDir": "./src"
   },
-  "references": [{ "path": "../../packages/flight" }],
+  "references": [{ "path": "../../packages/oop" }],
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }

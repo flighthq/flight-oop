@@ -1,4 +1,4 @@
-import { Bitmap, ImageSource, MovieClip } from '@flighthq/flight';
+import { Bitmap, ImageSource, MovieClip } from '@flighthq/oop';
 
 export default class Main extends MovieClip {
   bitmap: Bitmap = new Bitmap();

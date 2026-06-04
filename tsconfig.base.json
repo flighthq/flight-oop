@@ -13,8 +13,8 @@
     "sourceMap": true,
     "composite": true,
     "paths": {
-      "@flighthq/flight": ["./packages/flight/src/index.ts"],
-      "@flighthq/flight/*": ["./packages/flight/src/*"]
+      "@flighthq/oop": ["./packages/oop/src/index.ts"],
+      "@flighthq/oop/*": ["./packages/oop/src/*"]
     },
     "types": ["@testing-library/jest-dom", "vitest/globals"] // Include Vitest globals for type-checking
   },
