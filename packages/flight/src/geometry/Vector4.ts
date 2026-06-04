@@ -1,5 +1,5 @@
-import { vector2, vector3, vector4 } from '@flighthq/engine';
-import type { Vector4 as RawVector4 } from '@flighthq/engine';
+import { vector2, vector3, vector4 } from '../internal/sdkCompat.js';
+import type { Vector4 as RawVector4 } from '../internal/sdkCompat.js';
 
 import FlightObject from '../FlightObject';
 import type Vector2 from './Vector2';

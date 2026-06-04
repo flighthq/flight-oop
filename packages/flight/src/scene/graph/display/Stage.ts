@@ -1,5 +1,5 @@
-import { createStage } from '@flighthq/engine';
-import type { Stage as RawStage, StageData } from '@flighthq/engine';
+import { createStage } from '../../../internal/sdkCompat.js';
+import type { Stage as RawStage, StageData } from '../../../internal/sdkCompat.js';
 
 import FlightObject from '../../../FlightObject.js';
 import DisplayContainer from './DisplayContainer.js';

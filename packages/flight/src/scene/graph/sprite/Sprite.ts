@@ -9,8 +9,8 @@ import {
   swapChildren as _swapChildren,
   swapChildrenAt as _swapChildrenAt,
   createSprite,
-} from '@flighthq/engine';
-import type { Sprite as RawSprite, SpriteData } from '@flighthq/engine';
+} from '../../../internal/sdkCompat.js';
+import type { Sprite as RawSprite, SpriteData } from '../../../internal/sdkCompat.js';
 
 import FlightObject from '../../../FlightObject';
 import SpriteNode from './SpriteNode';

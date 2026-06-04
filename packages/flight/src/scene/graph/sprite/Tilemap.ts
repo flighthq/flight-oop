@@ -1,5 +1,5 @@
-import { createTilemap } from '@flighthq/engine';
-import type { Tilemap as RawTilemap, TilemapData } from '@flighthq/engine';
+import { createTilemap } from '../../../internal/sdkCompat.js';
+import type { Tilemap as RawTilemap, TilemapData } from '../../../internal/sdkCompat.js';
 
 import { Tileset } from '../../../assets';
 import FlightObject from '../../../FlightObject';

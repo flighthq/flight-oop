@@ -1,5 +1,5 @@
-import { createSpritesheet } from '@flighthq/engine';
-import type { Spritesheet as RawSpritesheet } from '@flighthq/engine';
+import { createSpritesheet } from '../../internal/sdkCompat.js';
+import type { Spritesheet as RawSpritesheet } from '../../internal/sdkCompat.js';
 
 import TextureAtlas from '../../assets/TextureAtlas';
 import FlightObject from '../../FlightObject';

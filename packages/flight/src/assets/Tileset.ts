@@ -1,5 +1,5 @@
-import { createTileset } from '@flighthq/engine';
-import type { Tileset as RawTileset } from '@flighthq/engine';
+import { createTileset } from '../internal/sdkCompat.js';
+import type { Tileset as RawTileset } from '../internal/sdkCompat.js';
 
 import FlightObject from '../FlightObject';
 import TextureAtlas from './TextureAtlas';

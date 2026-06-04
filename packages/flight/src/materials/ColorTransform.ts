@@ -1,5 +1,5 @@
-import { colorTransform } from '@flighthq/engine';
-import type { ColorTransform as RawColorTransform } from '@flighthq/engine';
+import { colorTransform } from '../internal/sdkCompat.js';
+import type { ColorTransform as RawColorTransform } from '../internal/sdkCompat.js';
 
 import FlightObject from '../FlightObject';
 

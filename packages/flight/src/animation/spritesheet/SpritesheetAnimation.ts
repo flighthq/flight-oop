@@ -1,5 +1,5 @@
-import { createSpritesheetAnimation } from '@flighthq/engine';
-import type { SpritesheetAnimation as RawSpritesheetAnimation } from '@flighthq/engine';
+import { createSpritesheetAnimation } from '../../internal/sdkCompat.js';
+import type { SpritesheetAnimation as RawSpritesheetAnimation } from '../../internal/sdkCompat.js';
 
 import FlightObject from '../../FlightObject';
 

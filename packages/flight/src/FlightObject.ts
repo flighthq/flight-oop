@@ -1,5 +1,5 @@
-import { attachBinding, createEntity, getBinding } from '@flighthq/engine';
-import type { Entity } from '@flighthq/engine';
+import { attachBinding, createEntity, getBinding } from './internal/sdkCompat.js';
+import type { Entity } from './internal/sdkCompat.js';
 
 export default class FlightObject<RawType extends Entity> {
   private static nextRaw: object | null = null;

@@ -1,5 +1,5 @@
-import { matrix4x4 } from '@flighthq/engine';
-import type { Matrix4x4 as RawMatrix4 } from '@flighthq/engine';
+import { matrix4x4 } from '../internal/sdkCompat.js';
+import type { Matrix4x4 as RawMatrix4 } from '../internal/sdkCompat.js';
 
 import FlightObject from '../FlightObject';
 import type Matrix from './Matrix';

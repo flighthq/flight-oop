@@ -1,5 +1,5 @@
-import { createMovieClip } from '@flighthq/engine';
-import type { MovieClip as RawMovieClip, MovieClipData } from '@flighthq/engine';
+import { createMovieClip } from '../../../internal/sdkCompat.js';
+import type { MovieClip as RawMovieClip, MovieClipData } from '../../../internal/sdkCompat.js';
 
 import FlightObject from '../../../FlightObject.js';
 import DisplayContainer from './DisplayContainer.js';

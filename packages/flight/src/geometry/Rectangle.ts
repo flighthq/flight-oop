@@ -1,5 +1,5 @@
-import { rectangle } from '@flighthq/engine';
-import type { Rectangle as RawRectangle } from '@flighthq/engine';
+import { rectangle } from '../internal/sdkCompat.js';
+import type { Rectangle as RawRectangle } from '../internal/sdkCompat.js';
 
 import FlightObject from '../FlightObject.js';
 import Vector2 from './Vector2.js';

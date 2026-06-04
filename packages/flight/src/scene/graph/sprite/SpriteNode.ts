@@ -1,5 +1,5 @@
-import { getBoundsRect, getParent, invalidateAppearance, invalidateLocalTransform } from '@flighthq/engine';
-import type { BlendMode, Shader, SpriteNode as RawSpriteNode } from '@flighthq/engine';
+import { getBoundsRect, getParent, invalidateAppearance, invalidateLocalTransform } from '../../../internal/sdkCompat.js';
+import type { BlendMode, Shader, SpriteNode as RawSpriteNode } from '../../../internal/sdkCompat.js';
 
 import ColorTransform from '../../../materials/ColorTransform';
 import FlightObject from '../../../FlightObject';

@@ -1,5 +1,5 @@
-import { invalidateAppearance, createQuadBatch, reserveQuadBatch, resizeQuadBatch } from '@flighthq/engine';
-import type { QuadBatch as RawQuadBatch, QuadBatchData, QuadTransformType } from '@flighthq/engine';
+import { invalidateAppearance, createQuadBatch, reserveQuadBatch, resizeQuadBatch } from '../../../internal/sdkCompat.js';
+import type { QuadBatch as RawQuadBatch, QuadBatchData, QuadTransformType } from '../../../internal/sdkCompat.js';
 
 import TextureAtlas from '../../../assets/TextureAtlas';
 import FlightObject from '../../../FlightObject';

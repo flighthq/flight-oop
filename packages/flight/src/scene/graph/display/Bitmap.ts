@@ -1,5 +1,5 @@
-import { createBitmap, invalidateAppearance, invalidateLocalBounds } from '@flighthq/engine';
-import type { Bitmap as RawBitmap, BitmapData } from '@flighthq/engine';
+import { createBitmap, invalidateAppearance, invalidateLocalBounds } from '../../../internal/sdkCompat.js';
+import type { Bitmap as RawBitmap, BitmapData } from '../../../internal/sdkCompat.js';
 
 import ImageSource from '../../../assets/ImageSource';
 import FlightObject from '../../../FlightObject';

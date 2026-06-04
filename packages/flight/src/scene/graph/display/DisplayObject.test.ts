@@ -9,10 +9,9 @@ import {
   getLocalBoundsID,
   getLocalTransform2D,
   getDisplayObjectRuntime,
-} from '@flighthq/engine';
-import type { DisplayObjectRuntime } from '@flighthq/engine';
+} from '../../../internal/sdkCompat.js';
+import type { DisplayObjectRuntime } from '../../../internal/sdkCompat.js';
 
-import Matrix from '../../../geometry/Matrix.js';
 import Rectangle from '../../../geometry/Rectangle.js';
 import Vector2 from '../../../geometry/Vector2.js';
 import DisplayObject from './DisplayObject.js';
@@ -30,11 +29,9 @@ describe('DisplayObject', () => {
   describe('constructor', () => {
     it('initializes default values', () => {
       expect(displayObject.alpha).toBe(1);
-      expect(displayObject.cacheAsBitmap).toBe(false);
       expect(displayObject.height).toBe(0);
       expect(displayObject.mask).toBeNull();
       expect(displayObject.name).toBeNull();
-      expect(displayObject.opaqueBackground).toBeNull();
       expect(displayObject.parent).toBeNull();
       expect(displayObject.root).toBeNull();
       expect(displayObject.rotation).toBe(0);
@@ -66,41 +63,6 @@ describe('DisplayObject', () => {
     it('does not invalidate when unchanged', () => {
       displayObject.alpha = 1;
       expect(getAppearanceID(displayObject.raw)).toBe(0);
-    });
-  });
-
-  describe('cacheAsBitmap', () => {
-    it('invalidates appearance when toggled', () => {
-      displayObject.cacheAsBitmap = true;
-      expect(getAppearanceID(displayObject.raw)).toBe(1);
-
-      displayObject.cacheAsBitmap = false;
-      expect(getAppearanceID(displayObject.raw)).toBe(2);
-    });
-  });
-
-  describe('cacheAsBitmapMatrix', () => {
-    it('does not invalidate if cacheAsBitmap is false', () => {
-      displayObject.cacheAsBitmapMatrix = new Matrix();
-      expect(getAppearanceID(displayObject.raw)).toBe(0);
-    });
-
-    it('marks transform dirty when cacheAsBitmap is true and matrix changes', () => {
-      displayObject.cacheAsBitmap = true;
-      displayObject.cacheAsBitmapMatrix = new Matrix(2, 0, 0, 2);
-
-      expect(getAppearanceID(displayObject.raw)).toBe(2);
-    });
-
-    it('does not invalidate transform if matrix values are equal', () => {
-      const m = new Matrix();
-      expect(getAppearanceID(displayObject.raw)).toBe(0);
-      displayObject.cacheAsBitmapMatrix = m;
-      expect(getAppearanceID(displayObject.raw)).toBe(0);
-      displayObject.cacheAsBitmap = true;
-      expect(getAppearanceID(displayObject.raw)).toBe(1);
-      displayObject.cacheAsBitmapMatrix = m;
-      expect(getAppearanceID(displayObject.raw)).toBe(1);
     });
   });
 
@@ -187,9 +149,9 @@ describe('DisplayObject', () => {
     // });
   });
 
-  describe('scrollRect', () => {
+  describe('scrollRectangle', () => {
     it('marks clip dirty when changed', () => {
-      displayObject.scrollRect = new Rectangle();
+      displayObject.scrollRectangle = new Rectangle();
       expect(getAppearanceID(displayObject.raw)).toBe(1);
     });
   });
@@ -498,7 +460,6 @@ describe('DisplayObject', () => {
     beforeEach(() => {
       obj = new TestDisplayObject();
       obj.visible = true;
-      obj.opaqueBackground = 0xff0000;
       // set a simple local bounds rectangle
       rectangle.setTo(getLocalBoundsRect(obj.raw), 0, 0, 100, 100);
     });
@@ -515,12 +476,6 @@ describe('DisplayObject', () => {
 
     it('returns false if object is not visible', () => {
       obj.visible = false;
-      const result = obj.hitTestPoint(50, 50);
-      expect(result).toBe(false);
-    });
-
-    it('returns false if object has no opaqueBackground', () => {
-      obj.opaqueBackground = null;
       const result = obj.hitTestPoint(50, 50);
       expect(result).toBe(false);
     });

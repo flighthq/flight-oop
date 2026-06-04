@@ -1,5 +1,5 @@
-import { createTextureAtlasRegion } from '@flighthq/engine';
-import type { TextureAtlasRegion as RawTextureAtlasRegion } from '@flighthq/engine';
+import { createTextureAtlasRegion } from '../internal/sdkCompat.js';
+import type { TextureAtlasRegion as RawTextureAtlasRegion } from '../internal/sdkCompat.js';
 
 import FlightObject from '../FlightObject';
 

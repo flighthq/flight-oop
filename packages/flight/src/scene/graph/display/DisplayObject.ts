@@ -1,5 +1,4 @@
 import {
-  matrix3x2,
   rectangle,
   hitTestObject as __hitTestObject,
   hitTestPoint as __hitTestPoint,
@@ -14,11 +13,10 @@ import {
   createDisplayObject,
   getDisplayObjectRuntime,
   StageKind,
-} from '@flighthq/engine';
-import type { BlendMode, DisplayObject as RawDisplayObject, Filter, Shader } from '@flighthq/engine';
+} from '../../../internal/sdkCompat.js';
+import type { BlendMode, DisplayObject as RawDisplayObject, Shader } from '../../../internal/sdkCompat.js';
 
 import FlightObject from '../../../FlightObject.js';
-import Matrix from '../../../geometry/Matrix.js';
 import Rectangle from '../../../geometry/Rectangle.js';
 import Vector2 from '../../../geometry/Vector2.js';
 import type LoaderInfo from './LoaderInfo.js';
@@ -98,61 +96,6 @@ export default class DisplayObject extends FlightObject<RawDisplayObject> {
     invalidateAppearance(this.__raw);
   }
 
-  get cacheAsBitmap(): boolean {
-    return this.__raw.filters === null ? this.__raw.cacheAsBitmap : true;
-  }
-
-  set cacheAsBitmap(value: boolean) {
-    if (value === this.__raw.cacheAsBitmap) return;
-    this.__raw.cacheAsBitmap = value;
-    invalidateAppearance(this.__raw);
-  }
-
-  get cacheAsBitmapMatrix(): Matrix | null {
-    if (this.__raw.cacheAsBitmapMatrix === null) return null;
-    return Matrix.fromRaw(this.__raw.cacheAsBitmapMatrix);
-  }
-
-  set cacheAsBitmapMatrix(value: Matrix | null) {
-    if (value !== null) {
-      if (this.__raw.cacheAsBitmapMatrix !== null) {
-        if (matrix3x2.equals(this.__raw.cacheAsBitmapMatrix, value.raw)) return;
-        matrix3x2.copy(this.__raw.cacheAsBitmapMatrix, value.raw);
-      } else {
-        this.__raw.cacheAsBitmapMatrix = matrix3x2.clone(value.raw);
-      }
-    } else {
-      if (this.__raw.cacheAsBitmapMatrix === null) return;
-      this.__raw.cacheAsBitmapMatrix = null;
-    }
-    if (this.__raw.cacheAsBitmap) {
-      invalidateAppearance(this.__raw);
-    }
-  }
-
-  get filters(): Filter[] {
-    const filters = this.__raw.filters;
-    if (filters === null) {
-      return [];
-    } else {
-      return filters.slice();
-    }
-  }
-
-  set filters(value: Filter[] | null) {
-    if ((value === null || value.length == 0) && this.__raw.filters === null) return;
-
-    // if (value !== null) {
-    //   target[$.filters] = value.map((filter) => {
-    //     return filter.clone();
-    //   });
-    // } else {
-    this.__raw.filters = null;
-    // }
-
-    invalidateAppearance(this.__raw);
-  }
-
   get height(): number {
     return getBoundsRect(this.__raw).height;
   }
@@ -197,18 +140,8 @@ export default class DisplayObject extends FlightObject<RawDisplayObject> {
     this.__raw.name = value;
   }
 
-  get opaqueBackground(): number | null {
-    return this.__raw.opaqueBackground;
-  }
-
-  set opaqueBackground(value: number | null) {
-    if (value === this.__raw.opaqueBackground) return;
-    this.__raw.opaqueBackground = value;
-    invalidateAppearance(this.__raw);
-  }
-
   get parent(): DisplayObject | null {
-    return FlightObject.get(getParent(this.__raw));
+    return FlightObject.get(getParent(this.__raw)) as DisplayObject | null;
   }
 
   get root(): DisplayObject | null {
@@ -236,28 +169,6 @@ export default class DisplayObject extends FlightObject<RawDisplayObject> {
     invalidateLocalTransform(this.__raw);
   }
 
-  get scale9Grid(): Rectangle | null {
-    if (this.__raw.scale9Grid === null) {
-      return null;
-    }
-    return Rectangle.fromRaw(this.__raw.scale9Grid);
-  }
-
-  set scale9Grid(value: Rectangle | null) {
-    const data = this.__raw;
-    if (value === null && data.scale9Grid === null) return;
-    if (value !== null && data.scale9Grid !== null && rectangle.equals(data.scale9Grid, value)) return;
-
-    if (value !== null) {
-      if (data.scale9Grid === null) data.scale9Grid = rectangle.create();
-      rectangle.copy(data.scale9Grid, value);
-    } else {
-      data.scale9Grid = null;
-    }
-
-    invalidateAppearance(this.__raw);
-  }
-
   get scaleX(): number {
     return this.__raw.scaleX;
   }
@@ -278,23 +189,23 @@ export default class DisplayObject extends FlightObject<RawDisplayObject> {
     invalidateLocalTransform(this.__raw);
   }
 
-  get scrollRect(): Rectangle | null {
-    if (this.__raw.scrollRect === null) {
+  get scrollRectangle(): Rectangle | null {
+    if (this.__raw.scrollRectangle === null) {
       return null;
     }
-    return Rectangle.fromRaw(this.__raw.scrollRect);
+    return Rectangle.fromRaw(this.__raw.scrollRectangle);
   }
 
-  set scrollRect(value: Rectangle | null) {
+  set scrollRectangle(value: Rectangle | null) {
     const data = this.__raw;
-    if (value === null && data.scrollRect === null) return;
-    if (value !== null && data.scrollRect !== null && rectangle.equals(data.scrollRect, value)) return;
+    if (value === null && data.scrollRectangle === null) return;
+    if (value !== null && data.scrollRectangle !== null && rectangle.equals(data.scrollRectangle, value)) return;
 
     if (value !== null) {
-      if (data.scrollRect === null) data.scrollRect = rectangle.create();
-      rectangle.copy(data.scrollRect, value);
+      if (data.scrollRectangle === null) data.scrollRectangle = rectangle.create();
+      rectangle.copy(data.scrollRectangle, value);
     } else {
-      data.scrollRect = null;
+      data.scrollRectangle = null;
     }
 
     invalidateAppearance(this.__raw);
@@ -345,12 +256,6 @@ export default class DisplayObject extends FlightObject<RawDisplayObject> {
     //     __objectTransform.__hasMatrix3x2 = false;
     // }
 
-    // if (!__objectTransform.__colorTransform.__equals(value.__colorTransform, true)
-    //     || (!cacheAsBitmap && __objectTransform.__colorTransform.alphaMultiplier != value.__colorTransform.alphaMultiplier))
-    // {
-    //     __objectTransform.__colorTransform.__copyFrom(value.colorTransform);
-    //     __setRenderDirty();
-    // }
   }
 
   get visible(): boolean {

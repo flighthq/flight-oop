@@ -21,7 +21,7 @@
     "test:run": "vitest run"
   },
   "dependencies": {
-    "@flighthq/engine": "*"
+    "@flighthq/sdk": "*"
   },
   "devDependencies": {
     "typescript": "^5.3.0"

@@ -1,5 +1,5 @@
-import { createImageSource } from '@flighthq/engine';
-import type { ImageSource as RawImageSource } from '@flighthq/engine';
+import { createImageSource } from '../internal/sdkCompat.js';
+import type { ImageSource as RawImageSource } from '../internal/sdkCompat.js';
 
 import FlightObject from '../FlightObject';
 

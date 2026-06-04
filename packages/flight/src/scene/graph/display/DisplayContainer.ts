@@ -8,7 +8,7 @@ import {
   setChildIndex as _setChildIndex,
   swapChildren as _swapChildren,
   swapChildrenAt as _swapChildrenAt,
-} from '@flighthq/engine';
+} from '../../../internal/sdkCompat.js';
 
 import FlightObject from '../../../FlightObject.js';
 import DisplayObject from './DisplayObject.js';
@@ -35,7 +35,7 @@ export default class DisplayContainer extends DisplayObject {
 
   removeChildAt(index: number): DisplayObject | null {
     const raw = _removeChildAt(this.__raw, index);
-    return FlightObject.get(raw);
+    return FlightObject.get(raw) as DisplayObject | null;
   }
 
   removeChildren(beginIndex: number = 0, endIndex?: number): void {
