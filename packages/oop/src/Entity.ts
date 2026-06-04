@@ -1,7 +1,7 @@
 import { attachBinding, createEntity, getBinding } from './internal/sdkCompat.js';
-import type { Entity } from './internal/sdkCompat.js';
+import type { Entity as RawEntity } from './internal/sdkCompat.js';
 
-export default class Entity<RawType extends Entity> {
+export default class Entity<RawType extends RawEntity> {
   private static nextRaw: object | null = null;
 
   protected __raw: RawType;
@@ -22,14 +22,14 @@ export default class Entity<RawType extends Entity> {
     return createEntity();
   }
 
-  static get<RawType extends Entity, Type extends Entity<RawType>>(
+  static get<RawType extends RawEntity, Type extends Entity<RawType>>(
     raw: Readonly<RawType> | null | undefined,
   ): Type | null {
     if (!raw) return null;
     return getBinding(raw) as Type | null;
   }
 
-  static getOrCreate<RawType extends Entity, Type extends Entity<Entity>>(
+  static getOrCreate<RawType extends RawEntity, Type extends Entity<RawEntity>>(
     raw: Readonly<RawType> | null | undefined,
     classType: new () => Type,
   ): Type | null {

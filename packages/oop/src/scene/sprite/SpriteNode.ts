@@ -89,6 +89,26 @@ export default class SpriteNode extends Entity<RawSpriteNode> {
     return Entity.get(getParent(this.__raw)) as unknown as Sprite;
   }
 
+  get originX(): number {
+    return this.__raw.originX;
+  }
+
+  set originX(value: number) {
+    if (value === this.__raw.originX) return;
+    this.__raw.originX = value;
+    invalidateLocalTransform(this.__raw);
+  }
+
+  get originY(): number {
+    return this.__raw.originY;
+  }
+
+  set originY(value: number) {
+    if (value === this.__raw.originY) return;
+    this.__raw.originY = value;
+    invalidateLocalTransform(this.__raw);
+  }
+
   get rotation(): number {
     return this.__raw.rotation;
   }

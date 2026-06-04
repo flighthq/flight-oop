@@ -9,10 +9,14 @@ import {
   swapChildren as _swapChildren,
   swapChildrenAt as _swapChildrenAt,
   createSprite,
+  invalidateAppearance,
+  invalidateLocalBounds,
 } from '../../internal/sdkCompat.js';
 import type { Sprite as RawSprite, SpriteData } from '../../internal/sdkCompat.js';
 
+import TextureAtlas from '../../assets/TextureAtlas';
 import Entity from '../../Entity';
+import Rectangle from '../../geometry/Rectangle';
 import SpriteNode from './SpriteNode';
 
 export default class Sprite extends SpriteNode {
@@ -69,15 +73,40 @@ export default class Sprite extends SpriteNode {
 
   // Get & Set Methods
 
+  get atlas(): TextureAtlas | null {
+    return Entity.getOrCreate(this.__data.atlas, TextureAtlas);
+  }
+
+  set atlas(value: TextureAtlas | null) {
+    if (this.__data.atlas === (value !== null ? value.raw : null)) return;
+    this.__data.atlas = value !== null ? value.raw : null;
+    invalidateLocalBounds(this.__raw);
+    invalidateAppearance(this.__raw);
+  }
+
   get id(): number {
     return this.__data.id;
   }
 
   set id(value: number) {
+    if (value === this.__data.id) return;
     this.__data.id = value;
+    invalidateLocalBounds(this.__raw);
+    invalidateAppearance(this.__raw);
   }
 
   get numChildren() {
     return _getNumChildren(this.__raw);
+  }
+
+  get rect(): Rectangle | null {
+    return Entity.getOrCreate(this.__data.rect, Rectangle);
+  }
+
+  set rect(value: Rectangle | null) {
+    if (this.__data.rect === (value !== null ? value.raw : null)) return;
+    this.__data.rect = value !== null ? value.raw : null;
+    invalidateLocalBounds(this.__raw);
+    invalidateAppearance(this.__raw);
   }
 }

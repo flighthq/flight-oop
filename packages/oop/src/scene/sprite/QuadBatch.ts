@@ -1,9 +1,19 @@
-import { invalidateAppearance, createQuadBatch, reserveQuadBatch, resizeQuadBatch } from '../../internal/sdkCompat.js';
+import {
+  getQuadBatchCapacity,
+  hitTestQuadBatchPoint,
+  hitTestQuadBatchPointXY,
+  invalidateAppearance,
+  createQuadBatch,
+  measureQuadBatchBoundsRectangle,
+  reserveQuadBatch,
+  resizeQuadBatch,
+} from '../../internal/sdkCompat.js';
 import type { QuadBatch as RawQuadBatch, QuadBatchData, QuadTransformType } from '../../internal/sdkCompat.js';
 
 import TextureAtlas from '../../assets/TextureAtlas';
 import Entity from '../../Entity';
 import Matrix from '../../geometry/Matrix';
+import Rectangle from '../../geometry/Rectangle';
 import Vector2 from '../../geometry/Vector2';
 import SpriteNode from './SpriteNode';
 
@@ -34,6 +44,19 @@ export default class QuadBatch extends SpriteNode {
 
   readVector2(index: number): Vector2 {
     return Vector2.fromFloat32Array(this.__data.transforms, index * 2);
+  }
+
+  hitTestPoint(point: Readonly<Vector2>): number {
+    return hitTestQuadBatchPoint(this.__raw, point);
+  }
+
+  hitTestPointXY(x: number, y: number): number {
+    return hitTestQuadBatchPointXY(this.__raw, x, y);
+  }
+
+  measureBoundsRectangle(out: Rectangle = new Rectangle()): Rectangle {
+    measureQuadBatchBoundsRectangle(out.raw, this.__raw);
+    return out;
   }
 
   reserve(capacity: number): void {
@@ -82,7 +105,13 @@ export default class QuadBatch extends SpriteNode {
   }
 
   set atlas(value: TextureAtlas | null) {
+    if (this.__data.atlas === (value !== null ? value.raw : null)) return;
     this.__data.atlas = value !== null ? value.raw : null;
+    invalidateAppearance(this.__raw);
+  }
+
+  get capacity(): number {
+    return getQuadBatchCapacity(this.__raw);
   }
 
   get ids(): Uint16Array {
@@ -91,6 +120,7 @@ export default class QuadBatch extends SpriteNode {
 
   set ids(value: Uint16Array) {
     this.__data.ids = value;
+    invalidateAppearance(this.__raw);
   }
 
   get instanceCount(): number {
@@ -98,7 +128,7 @@ export default class QuadBatch extends SpriteNode {
   }
 
   set instanceCount(value: number) {
-    this.__data.instanceCount = value;
+    this.resize(value);
   }
 
   override get raw(): RawQuadBatch {
@@ -111,6 +141,7 @@ export default class QuadBatch extends SpriteNode {
 
   set transforms(value: Float32Array) {
     this.__data.transforms = value;
+    invalidateAppearance(this.__raw);
   }
 
   get transformType(): QuadTransformType {
@@ -118,7 +149,10 @@ export default class QuadBatch extends SpriteNode {
   }
 
   set transformType(value: QuadTransformType) {
+    if (value === this.__data.transformType) return;
     this.__data.transformType = value;
+    reserveQuadBatch(this.__raw, this.__data.instanceCount);
+    invalidateAppearance(this.__raw);
   }
 }
 

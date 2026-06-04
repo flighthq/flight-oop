@@ -16,8 +16,8 @@ import {
 } from '../internal/sdkCompat.js';
 import type { CanvasRenderOptions as CanvasRenderOptionsModel, CanvasRenderState } from '../internal/sdkCompat.js';
 
-import type DisplayObject from '../scene/graph/display/DisplayObject';
-import type SpriteNode from '../scene/graph/sprite/SpriteNode';
+import type DisplayObject from '../scene/display/DisplayObject';
+import type SpriteNode from '../scene/sprite/SpriteNode';
 import type CanvasRenderOptions from './CanvasRenderOptions';
 
 export default class CanvasRenderer {
