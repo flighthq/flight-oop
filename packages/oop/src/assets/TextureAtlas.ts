@@ -1,4 +1,15 @@
-import { addTextureAtlasRegion, createTextureAtlas } from '../internal/sdkCompat.js';
+import {
+  addTextureAtlasRegion,
+  createTextureAtlas,
+  createTextureAtlasFromCanvas,
+  createTextureAtlasFromImageBitmap,
+  createTextureAtlasFromImageElement,
+  createTextureAtlasFromImageSource,
+  loadTextureAtlasFromArrayBuffer,
+  loadTextureAtlasFromBase64,
+  loadTextureAtlasFromBlob,
+  loadTextureAtlasFromURL,
+} from '../internal/sdkCompat.js';
 import type { TextureAtlas as RawTextureAtlas } from '../internal/sdkCompat.js';
 
 import Entity from '../Entity';
@@ -29,6 +40,38 @@ export default class TextureAtlas extends Entity<RawTextureAtlas> {
 
   static fromRaw(raw: RawTextureAtlas): TextureAtlas {
     return Entity.getOrCreate(raw, TextureAtlas)!;
+  }
+
+  static fromCanvas(canvas: HTMLCanvasElement): TextureAtlas {
+    return TextureAtlas.fromRaw(createTextureAtlasFromCanvas(canvas));
+  }
+
+  static fromImageBitmap(bitmap: ImageBitmap): TextureAtlas {
+    return TextureAtlas.fromRaw(createTextureAtlasFromImageBitmap(bitmap));
+  }
+
+  static fromImageElement(img: HTMLImageElement): TextureAtlas {
+    return TextureAtlas.fromRaw(createTextureAtlasFromImageElement(img));
+  }
+
+  static fromImageSource(source: ImageSource): TextureAtlas {
+    return TextureAtlas.fromRaw(createTextureAtlasFromImageSource(source.raw));
+  }
+
+  static async loadFromArrayBuffer(buffer: ArrayBuffer, mimeType?: string): Promise<TextureAtlas> {
+    return TextureAtlas.fromRaw(await loadTextureAtlasFromArrayBuffer(buffer, mimeType));
+  }
+
+  static async loadFromBase64(base64: string, mimeType: string): Promise<TextureAtlas> {
+    return TextureAtlas.fromRaw(await loadTextureAtlasFromBase64(base64, mimeType));
+  }
+
+  static async loadFromBlob(blob: Blob): Promise<TextureAtlas> {
+    return TextureAtlas.fromRaw(await loadTextureAtlasFromBlob(blob));
+  }
+
+  static async loadFromURL(url: string, crossOrigin?: string): Promise<TextureAtlas> {
+    return TextureAtlas.fromRaw(await loadTextureAtlasFromURL(url, crossOrigin));
   }
 
   getRegion(index: number): Readonly<TextureAtlasRegion> | null {

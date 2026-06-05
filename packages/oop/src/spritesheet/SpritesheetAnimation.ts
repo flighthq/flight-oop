@@ -4,13 +4,14 @@ import type { SpritesheetAnimation as RawSpritesheetAnimation } from '../interna
 import Entity from '../Entity';
 
 export default class SpritesheetAnimation extends Entity<RawSpritesheetAnimation> {
-  constructor(label?: string, frames?: number[], frameDuration?: number, loop?: boolean) {
+  constructor(frames?: number[], frameDuration?: number, loop?: boolean, originX?: number, originY?: number) {
     super();
     const raw = this.__raw;
-    if (label !== undefined) raw.label = label;
     if (frames !== undefined) raw.frames = frames;
     if (frameDuration !== undefined) raw.frameDuration = frameDuration;
     if (loop !== undefined) raw.loop = loop;
+    if (originX !== undefined) raw.originX = originX;
+    if (originY !== undefined) raw.originY = originY;
   }
 
   protected override __create() {
@@ -39,19 +40,27 @@ export default class SpritesheetAnimation extends Entity<RawSpritesheetAnimation
     this.__raw.frames = value;
   }
 
-  get label(): string | null {
-    return this.__raw.label;
-  }
-
-  set label(value: string | null) {
-    this.__raw.label = value;
-  }
-
   get loop(): boolean {
     return this.__raw.loop;
   }
 
   set loop(value: boolean) {
     this.__raw.loop = value;
+  }
+
+  get originX(): number {
+    return this.__raw.originX;
+  }
+
+  set originX(value: number) {
+    this.__raw.originX = value;
+  }
+
+  get originY(): number {
+    return this.__raw.originY;
+  }
+
+  set originY(value: number) {
+    this.__raw.originY = value;
   }
 }

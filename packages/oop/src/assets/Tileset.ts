@@ -1,7 +1,17 @@
-import { createTileset } from '../internal/sdkCompat.js';
+import {
+  createTileset,
+  createTilesetFromAtlas,
+  createTilesetFromImageSource,
+  initTilesetRegions,
+  loadTilesetFromArrayBuffer,
+  loadTilesetFromBase64,
+  loadTilesetFromBlob,
+  loadTilesetFromURL,
+} from '../internal/sdkCompat.js';
 import type { Tileset as RawTileset } from '../internal/sdkCompat.js';
 
 import Entity from '../Entity';
+import ImageSource from './ImageSource';
 import TextureAtlas from './TextureAtlas';
 
 export default class Tileset extends Entity<RawTileset> {
@@ -21,6 +31,49 @@ export default class Tileset extends Entity<RawTileset> {
 
   static fromRaw(raw: RawTileset): Tileset {
     return Entity.getOrCreate(raw, Tileset)!;
+  }
+
+  static fromAtlas(atlas: TextureAtlas, tileWidth: number, tileHeight: number): Tileset {
+    return Tileset.fromRaw(createTilesetFromAtlas(atlas.raw, tileWidth, tileHeight));
+  }
+
+  static fromImageSource(source: ImageSource, tileWidth: number, tileHeight: number): Tileset {
+    return Tileset.fromRaw(createTilesetFromImageSource(source.raw, tileWidth, tileHeight));
+  }
+
+  static async loadFromArrayBuffer(
+    buffer: ArrayBuffer,
+    tileWidth: number,
+    tileHeight: number,
+    mimeType?: string,
+  ): Promise<Tileset> {
+    return Tileset.fromRaw(await loadTilesetFromArrayBuffer(buffer, tileWidth, tileHeight, mimeType));
+  }
+
+  static async loadFromBase64(
+    base64: string,
+    mimeType: string,
+    tileWidth: number,
+    tileHeight: number,
+  ): Promise<Tileset> {
+    return Tileset.fromRaw(await loadTilesetFromBase64(base64, mimeType, tileWidth, tileHeight));
+  }
+
+  static async loadFromBlob(blob: Blob, tileWidth: number, tileHeight: number): Promise<Tileset> {
+    return Tileset.fromRaw(await loadTilesetFromBlob(blob, tileWidth, tileHeight));
+  }
+
+  static async loadFromURL(
+    url: string,
+    tileWidth: number,
+    tileHeight: number,
+    crossOrigin?: string,
+  ): Promise<Tileset> {
+    return Tileset.fromRaw(await loadTilesetFromURL(url, tileWidth, tileHeight, crossOrigin));
+  }
+
+  initRegions(): void {
+    initTilesetRegions(this.__raw);
   }
 
   // Get & Set Methods

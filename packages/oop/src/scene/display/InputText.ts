@@ -1,5 +1,36 @@
-import { createInputText, invalidateAppearance } from '../../internal/sdkCompat.js';
-import type { InputText as RawInputText, InputTextData } from '../../internal/sdkCompat.js';
+import {
+  appendInputText,
+  createInputText,
+  deleteInputTextBackward,
+  deleteInputTextForward,
+  getInputTextCaretIndex,
+  getInputTextCaretRectangle,
+  getInputTextCharacterIndexAtPoint,
+  getInputTextDisplayText,
+  getInputTextSelectionBeginIndex,
+  getInputTextSelectionEndIndex,
+  getInputTextSelectionRectangles,
+  getInputTextSelectionText,
+  handleInputTextKeyboard,
+  insertInputText,
+  invalidateAppearance,
+  moveInputTextCaret,
+  replaceInputText,
+  replaceSelectedInputText,
+  selectAllInputText,
+  selectLineAtInputTextIndex,
+  selectWordAtInputTextIndex,
+  setInputTextSelection,
+} from '../../internal/sdkCompat.js';
+import type {
+  HandleInputTextKeyboardOptions,
+  InputKeyboardData,
+  InputText as RawInputText,
+  InputTextData,
+  InputTextSelectionRectangle,
+  ReplaceInputTextOptions,
+  TextLayoutResult,
+} from '../../internal/sdkCompat.js';
 
 import Entity from '../../Entity.js';
 import RichText from './RichText.js';
@@ -21,6 +52,70 @@ export default class InputText extends RichText {
 
   static override fromRaw(raw: RawInputText): InputText {
     return Entity.getOrCreate(raw, InputText)!;
+  }
+
+  append(text: string): void {
+    appendInputText(this.raw, text);
+  }
+
+  deleteBackward(): void {
+    deleteInputTextBackward(this.raw);
+  }
+
+  deleteForward(): void {
+    deleteInputTextForward(this.raw);
+  }
+
+  getCaretRectangle(layout: Readonly<TextLayoutResult>): InputTextSelectionRectangle {
+    const out = { height: 0, lineIndex: 0, width: 0, x: 0, y: 0 };
+    getInputTextCaretRectangle(out, this.raw, layout);
+    return out;
+  }
+
+  getCharacterIndexAtPoint(layout: Readonly<TextLayoutResult>, x: number, y: number): number {
+    return getInputTextCharacterIndexAtPoint(this.raw, layout, x, y);
+  }
+
+  getSelectionRectangles(layout: Readonly<TextLayoutResult>): InputTextSelectionRectangle[] {
+    const out: InputTextSelectionRectangle[] = [];
+    getInputTextSelectionRectangles(out, this.raw, layout);
+    return out;
+  }
+
+  handleKeyboard(data: Readonly<InputKeyboardData>, options?: Readonly<HandleInputTextKeyboardOptions>): boolean {
+    return handleInputTextKeyboard(this.raw, data, options);
+  }
+
+  insert(text: string): void {
+    insertInputText(this.raw, text);
+  }
+
+  moveCaret(index: number, extendSelection = false): void {
+    moveInputTextCaret(this.raw, index, extendSelection);
+  }
+
+  replace(beginIndex: number, endIndex: number, text: string, options?: Readonly<ReplaceInputTextOptions>): void {
+    replaceInputText(this.raw, beginIndex, endIndex, text, options);
+  }
+
+  replaceSelected(text: string, options?: Readonly<ReplaceInputTextOptions>): void {
+    replaceSelectedInputText(this.raw, text, options);
+  }
+
+  selectAll(): void {
+    selectAllInputText(this.raw);
+  }
+
+  selectLineAt(index: number): void {
+    selectLineAtInputTextIndex(this.raw, index);
+  }
+
+  selectWordAt(index: number): void {
+    selectWordAtInputTextIndex(this.raw, index);
+  }
+
+  setSelection(beginIndex: number, endIndex: number): void {
+    setInputTextSelection(this.raw, beginIndex, endIndex);
   }
 
   override get raw(): RawInputText {
@@ -45,6 +140,14 @@ export default class InputText extends RichText {
     if (value === this.__data.displayAsPassword) return;
     this.__data.displayAsPassword = value;
     invalidateAppearance(this.__raw);
+  }
+
+  get caretIndex(): number {
+    return getInputTextCaretIndex(this.raw);
+  }
+
+  get displayText(): string {
+    return getInputTextDisplayText(this.raw);
   }
 
   get passwordCharacter(): string {
@@ -83,5 +186,17 @@ export default class InputText extends RichText {
     if (value === this.__data.selectionColor) return;
     this.__data.selectionColor = value;
     invalidateAppearance(this.__raw);
+  }
+
+  get selectionBeginIndex(): number {
+    return getInputTextSelectionBeginIndex(this.raw);
+  }
+
+  get selectionEndIndex(): number {
+    return getInputTextSelectionEndIndex(this.raw);
+  }
+
+  get selectionText(): string {
+    return getInputTextSelectionText(this.raw);
   }
 }
